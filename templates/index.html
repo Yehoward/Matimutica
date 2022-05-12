@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="ro">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Laminarea podelei</title>
+    <link
+      href="{{ url_for('static', filename='css/bootstrap.css') }}"
+      rel="stylesheet"
+    />
+    <link
+      rel="shortcut icon"
+      href="{{ url_for('static', filename='matimutica.png') }}"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <div id="formular">
+        <div class="row my-1">
+          <div class="col input-group">
+            <label class="input-group-text" for="pretLucrator"
+              >Pret montaj</label
+            >
+            <input
+              class="form-control"
+              id="pretLucrator"
+              type="number"
+              step="0.1"
+              min="0"
+              onchange="checkNumber(this)"
+            /><br />
+            <span class="input-group-text">lei</span>
+          </div>
+          <div class="col input-group">
+            <label class="input-group-text" for="pretLaminat"
+              >Pret tapete</label
+            >
+            <input
+              class="form-control"
+              id="pretLaminat"
+              type="number"
+              step="0.1"
+              min="0"
+              onchange="checkNumber(this)"
+            /><br />
+            <span class="input-group-text">lei</span>
+          </div>
+        </div>
+        <h4>Dimensiunile peretilor</h4>
+        <ol class="list-group list-group-numbered" id="pereti">
+          <li
+            class="list-group-item d-flex justify-content-between align-items-start"
+          >
+            <div class="row ms-2 me-auto">
+              <div class="col input-group">
+                <label class="input-group-text" for="lungimea">Inaltimea</label>
+                <input
+                  class="form-control"
+                  type="number"
+                  step="0.1"
+                  min="0"
+                  onchange="checkNumber(this)"
+                /><br />
+                <span class="input-group-text">m</span>
+              </div>
+              <div class="col input-group">
+                <label class="input-group-text" for="latimea">Latimea</label>
+                <input
+                  class="form-control"
+                  type="number"
+                  step="0.1"
+                  min="0"
+                  onchange="checkNumber(this)"
+                /><br />
+                <span class="input-group-text">m</span>
+              </div>
+            </div>
+          </li>
+        </ol>
+      </div>
+      <div class="btn-group" role="group" aria-label="Basic outlined example">
+        <button class="btn btn-outline-secondary" onclick="addWall()">
+          Adaugă perete
+        </button>
+        <button class="btn btn-outline-secondary" onclick="rmWall()">
+          Distruge perete
+        </button>
+        <button onclick="clearInputs()" class="btn btn-outline-primary">
+          Șterge valori
+        </button>
+        <button onclick="calcPrets()" class="btn btn-outline-primary">
+          Calculati
+        </button>
+      </div>
+      <p>Pretul Final: <span id="rezultatCalculati"></span></p>
+    </div>
+    <script src="{{ url_for('static', filename='js/bootstrap.js') }}"></script>
+    <script>
+      function checkNumber(inputu) {
+        const valoare = inputu.value;
+        if (parseFloat(valoare) < 0) {
+          inputu.value = Math.abs(valoare);
+        }
+      }
+
+      function clearInputs() {
+        for (const item of document.getElementsByTagName("input")) {
+          item.value = 0;
+        }
+      }
+
+      function getAria() {
+        let htmlCollection = document.getElementById("pereti").children;
+        const lista = Array.prototype.slice.call(htmlCollection);
+        const ariaTotala = lista
+          .map((li) => {
+            const height = li.children[0].children[0].children[1].value;
+
+            const length = li.children[0].children[1].children[1].value;
+            return [parseFloat(height) || 0, parseFloat(length) || 0];
+          })
+          .map((dimensiuni) => dimensiuni[0] * dimensiuni[1])
+          .reduce((total, aria) => total + aria);
+        return ariaTotala;
+      }
+
+      function calcPrets() {
+        const pretLaminat =
+          parseFloat(document.getElementById("pretLaminat").value) || 0;
+        const pretLucrator =
+          parseFloat(document.getElementById("pretLucrator").value) || 0;
+        const rezultatCalculati = document.getElementById("rezultatCalculati");
+        rezultatCalculati.innerHTML = getAria() * (pretLaminat + pretLucrator);
+      }
+      /**
+       * @param {String} HTML representing a single element
+       * @return {Element}
+       */
+      function htmlToElement(html) {
+        var template = document.createElement("template");
+        html = html.trim(); // Never return a text node of whitespace as the result
+        template.innerHTML = html;
+        return template.content.firstChild;
+      }
+      function addWall() {
+        const pereti = document.getElementById("pereti");
+        pereti.appendChild(
+          htmlToElement(
+            ' <li class="list-group-item d-flex justify-content-between align-items-start" > <div class="row ms-2 me-auto"> <div class="col input-group"> <label class="input-group-text" for="lungimea">Inaltimea</label> <input class="form-control" type="number" step="0.1" min="0" onchange="checkNumber(this)" /><br /> <span class="input-group-text">m</span> </div> <div class="col input-group"> <label class="input-group-text" for="latimea">Latimea</label> <input class="form-control" type="number" step="0.1" min="0" onchange="checkNumber(this)" /><br /> <span class="input-group-text">m</span> </div> </div> </li> '
+          )
+        );
+      }
+
+      function rmWall() {
+        const pereti = document.getElementById("pereti");
+        console.log(pereti.children.length);
+        if (pereti.children.length === 1) {
+          alert("Virusul a fost descarcat si instalat cu succes");
+        } else {
+          pereti.lastChild.remove();
+        }
+      }
+    </script>
+  </body>
+</html>

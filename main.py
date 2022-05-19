@@ -1,10 +1,13 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 
 app = Flask(__name__)
 
 @app.route("/")
 def home(): 
-    return render_template("index.html")
+    print(request.args.to_dict())
+    dark_mode = request.args.to_dict().get("dark_mode","true")
+    dark_mode = True if dark_mode == "true" else False
+    return render_template("index.html", dark_mode = dark_mode)
 
 @app.route("/about")
 def about(): 

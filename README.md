@@ -13,7 +13,7 @@ Asigurativa ca aveti Pipenv instalat. Pentru a verifica verificati in terminal `
 Daca aveti pipenv derulati urmatoarele comenzi
 
 ```
-git clone
+git clone https://github.com/Yehoward/Matimutica
 cd Matimutica
 pipenv install
 ```

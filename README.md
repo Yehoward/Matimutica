@@ -25,3 +25,7 @@ In folderul Matimutica executati
 ```
 pipenv run python main.py
 ```
+
+# Actualizare
+
+Sctiti in interiorul folderului Matemutica `git pull` pentru a va actualiza. 

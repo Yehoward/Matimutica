@@ -1,3 +1,11 @@
+$("button#calc").click(
+function(){
+    $("#resultContainer").show()
+})
+$("button:first").click(
+function(){
+    $("#pereti li:last input").focus() 
+})
 function nrRuloane(latimeaRulon, latPerete, hPerete) {
     const lungRulon = 10//metri
     // Lungimea unui buc. de tapete
@@ -54,15 +62,15 @@ function nrRuloane(latimeaRulon, latPerete, hPerete) {
       parseFloat(document.getElementById("pretLucrator").value) || 0;
     const rezultatCalculati = document.getElementById("rezultatCalculati");
       // Calculam pretul tapetelor si actualizam informatiile pe sait  
-      const latRulon = 0.5
+      const latRulon = parseFloat($("#latRulon").val()) || 0
       $("#nrTapete").html(getRuloane(latRulon))
       $("#dimRulon").html(latRulon)
       $("#pretRulonlbl").html(pretRulon)
       $("#pretTapete").html(getRuloane(latRulon)*pretRulon) 
-      const pretCutie = -50004
+      const pretCutie = parseFloat($("#pretCutie").val()) || 0
       const pretTotClei = Math.ceil( getAria()/50 )*pretCutie
       $("#nrCutii").html(Math.ceil(getAria()/50))
-      $("#pretCutie").html(pretCutie)
+      $("#pretCutielbl").html(pretCutie)
       $("#pretClei").html(pretTotClei)
       const pretMunca = getAria()*pretLucrator
     rezultatCalculati.innerHTML = getRuloane(latRulon)*pretRulon + pretTotClei + pretMunca;
@@ -80,11 +88,12 @@ function nrRuloane(latimeaRulon, latPerete, hPerete) {
     template.innerHTML = html;
     return template.content.firstChild;
   }
-  function addWall() {
+  function addWall(defaultInaltime) {
     const pereti = document.getElementById("pereti");
+    const inaltimea = parseFloat($("#pereti li:last input").val()) || defaultInaltime 
     pereti.appendChild(
       htmlToElement(
-        ' <li class="list-group-item d-flex justify-content-between align-items-start" > <div class="row ms-2 me-auto"> <div class="col-sm input-group"> <label class="input-group-text" for="lungimea">Inaltimea</label> <input class="form-control" type="number" step="0.1" min="0" onchange="checkNumber(this)" /><br /> <span class="input-group-text">m</span> </div> <div class="col-sm input-group"> <label class="input-group-text" for="latimea">Latimea</label> <input class="form-control" type="number" step="0.1" min="0" onchange="checkNumber(this)" /><br /> <span class="input-group-text">m</span> </div> </div> </li> '
+        ` <li class="list-group-item d-flex justify-content-between align-items-start" > <div class="row ms-2 me-auto"> <div class="col-sm input-group"> <label class="input-group-text" for="lungimea">Inaltimea</label> <input class="form-control" type="number" step="0.1" min="0" onchange="checkNumber(this)" value="${inaltimea}"/><br /> <span class="input-group-text">m</span> </div> <div class="col-sm input-group"> <label class="input-group-text" for="latimea">Latimea</label> <input class="form-control" type="number" step="0.1" min="0" onchange="checkNumber(this)" /><br /> <span class="input-group-text">m</span> </div> </div> </li> `
       )
     );
   }

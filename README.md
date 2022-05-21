@@ -29,3 +29,7 @@ pipenv run python main.py
 # Actualizare
 
 Sctiti in interiorul folderului Matemutica `git pull` pentru a va actualiza. 
+
+# Mentiune
+
+Iconca am furat-o de pe <a href="https://www.flaticon.com/free-icons/pi" title="Pi icons">Pi icons created by Freepik - Flaticon</a> 

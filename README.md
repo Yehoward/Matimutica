@@ -1,12 +1,12 @@
 Tapeterlator
 ===
 
-# Descriere
+## Descriere
 
 Proiect la matematica - calculam pretul total pentru a incleia tapete.
 Introduci ce se cere si se calculeaza ce se calculeaza.
 
-# Instalarea cusleokului
+## Instalarea cusleokului
 
 Asigurativa ca aveti Pipenv instalat. Pentru a verifica verificati in terminal `pipenv`. In caz ca lipseste il puteti instala cu comanda `pip install --user pipenv` sau accesati linkul pentru mai multa informatie [pypi.org](https://pypi.org/project/pipenv/).
 
@@ -18,7 +18,7 @@ cd Matimutica
 pipenv install
 ```
 
-# Derularea severului
+## Derularea severului
 
 In folderul Matimutica executati
 
@@ -26,10 +26,10 @@ In folderul Matimutica executati
 pipenv run python main.py
 ```
 
-# Actualizare
+## Actualizare
 
 Sctiti in interiorul folderului Matemutica `git pull` pentru a va actualiza. 
 
-# Mentiune
+## Mentiune
 
 Iconca am furat-o de pe <a href="https://www.flaticon.com/free-icons/pi" title="Pi icons">Pi icons created by Freepik - Flaticon</a> 

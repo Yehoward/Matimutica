@@ -6,6 +6,7 @@ $("button:first").click(
 function(){
     $("#pereti li:last input").focus() 
 })
+
 function nrRuloane(latimeaRulon, latPerete, hPerete) {
     const lungRulon = 10//metri
     // Lungimea unui buc. de tapete
@@ -26,6 +27,9 @@ function nrRuloane(latimeaRulon, latPerete, hPerete) {
     }
   }
 
+    /**
+     * Returns the number of Ruloane needed to fully cover the walls
+     */
   function getRuloane(latRulon) {
     let htmlCollection = document.getElementById("pereti").children;
     const lista = Array.prototype.slice.call(htmlCollection);

@@ -28,6 +28,9 @@ function clearInputs() {
   }
 }
 
+/**
+* Returns the number of Ruloane needed to fully cover the walls
+*/
 function getRuloane(latRulon) {
   let htmlCollection = document.getElementById("pereti").children;
   const lista = Array.prototype.slice.call(htmlCollection);
